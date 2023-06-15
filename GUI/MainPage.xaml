@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Author:    Draeden Jensen and John Haraden
+     Date:      02 - 17 - 2023
+     Course:    CS 3500, University of Utah, School of Computing
+     Copyright: CS 3500, Draeden Jensen, and John Haraden - This work may not 
+                be copied for use in Academic Coursework.
+
+     We, Draeden Jensen and John Haraden, certify that this code was written from scratch and
+     we did not copy it in part or whole from another source.  All 
+     references used in the completion of the assignments are cited 
+     in the README file.
+
+     File Contents:
+     Implementation of the MainPage XAML which allows placing various containers and panels to the GUI
+     using the MAUI software. -->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GUI.MainPage">
+
+    <!--#region Creates menu bar and adds file and help menu items to the frame -->
+    <!-- **Clicked is the actionListener keyword for each event handler** -->
+    <ContentPage.MenuBarItems>
+        
+        <!--#region Creates the "File" tab and adds the "Save", "New", and "Open" options to it -->
+        <MenuBarItem Text="File">
+            <MenuFlyoutItem Text="Save" Clicked="FileMenuSaveAsync" />
+            <MenuFlyoutItem Text="New" Clicked="FileMenuNewAsync" />
+            <MenuFlyoutItem Text="Open" Clicked="FileMenuOpenAsync" />
+        </MenuBarItem>
+        <!--#endregion-->
+        
+        <!--#region Creates the "Help" tab and adds the "Tutorial" and "Something Fun" options to it -->
+        <MenuBarItem Text="Help">
+            <MenuFlyoutItem Text="Tutorial" Clicked="HelpMenuTutorial" />
+            <MenuFlyoutItem Text="Something Fun" Clicked="Colorize" />
+        </MenuBarItem>
+        <!--#endregion-->
+    </ContentPage.MenuBarItems>
+    <!--#endregion-->
+
+    <!--#region Creates the body of the GUI as a vertical stack allowing us to add a Cell Info display and the main grid -->
+    <VerticalStackLayout x:Name="Entire">
+        
+        <!--#region Creates the top section to display the currently selected cell "name", "contents", and "value" -->
+        <HorizontalStackLayout>
+            
+            <!-- Lines are used to delineate the three display labels. Using black and white lines increases accessibility when
+                 the operating system is set to use the "dark mode" feature-->
+            <Line X1="0" Y1="0" X2="0" Y2="50" Stroke="White" StrokeThickness="7"/>
+            <Line X1="0" Y1="0" X2="0" Y2="50" Stroke="Black" StrokeThickness="2"/>
+            <Line X1="0" Y1="0" X2="0" Y2="50" Stroke="White" StrokeThickness="7"/>
+            
+            <!-- Creates the label to display the "name" of the selected cell -->
+            <Label x:Name="selectedName" Text="Name" HeightRequest="20" WidthRequest="100" HorizontalTextAlignment="Center" FontSize="15"/>
+
+            <Line X1="0" Y1="0" X2="0" Y2="50" Stroke="White" StrokeThickness="7"/>
+            <Line X1="0" Y1="0" X2="0" Y2="50" Stroke="Black" StrokeThickness="2"/>
+            <Line X1="0" Y1="0" X2="0" Y2="50" Stroke="White" StrokeThickness="7"/>
+            
+            <!-- Creates the label to display the "content" of the selected cell -->
+            <Label x:Name="selectedContent" Text="Content" HeightRequest="20" WidthRequest="100" HorizontalTextAlignment="Center" FontSize="15"/>
+
+            <Line X1="0" Y1="0" X2="0" Y2="50" Stroke="White" StrokeThickness="7"/>
+            <Line X1="0" Y1="0" X2="0" Y2="50" Stroke="Black" StrokeThickness="2"/>
+            <Line X1="0" Y1="0" X2="0" Y2="50" Stroke="White" StrokeThickness="7"/>
+            
+            <!-- Creates the label to display the "value" of the selected cell -->
+            <Label x:Name="selectedValue" Text="Value" HeightRequest="20" WidthRequest="100" HorizontalTextAlignment="Center" FontSize="15"/>
+
+            <Line X1="0" Y1="0" X2="0" Y2="50" Stroke="White" StrokeThickness="7"/>
+            <Line X1="0" Y1="0" X2="0" Y2="50" Stroke="Black" StrokeThickness="2"/>
+            <Line X1="0" Y1="0" X2="0" Y2="50" Stroke="White" StrokeThickness="7"/>
+        </HorizontalStackLayout>
+        <!--#endregion-->
+        
+        <!--#region Creates a ScrollView for the main GUI panel and adds the TopLabels and TableGrid to the panel -->
+        <ScrollView
+                    x:Name="Table"
+                    Orientation="Both"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalScrollBarVisibility="Always"
+                    VerticalScrollBarVisibility="Always"
+                    HeightRequest="500">
+            <StackLayout>
+                <!-- Adds the TopLabels to the panel to display the column letters -->
+                <HorizontalStackLayout x:Name="TopLabels" BackgroundColor="LightBlue"/>
+                
+                <!--#region Adds the main TableGrid to the panel including the LeftLabels which display the row numbers -->
+                <Grid x:Name="TableGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="LeftColumn" Width="70 "/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <VerticalStackLayout x:Name="LeftLabels"  BackgroundColor="LightBlue"/>
+                </Grid>
+                <!--#endregion-->
+            </StackLayout>
+        </ScrollView>
+        <!--#endregion-->
+    </VerticalStackLayout>
+    <!--#endregion-->
+</ContentPage>
